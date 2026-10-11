@@ -144,17 +144,15 @@
         vimPlugins = prev.vimPlugins.extend (_: _: { ghost-nvim = final.callPackage ghost { }; });
       };
 
-      # `direnv allow` (or `nix develop`) in the repo.
       devShells = forAll (
         pkgs:
         let
           plugin = self.packages.${pkgs.stdenv.hostPlatform.system}.default;
 
-          # Your normal Neovim, but loading the plugin straight from this
-          # checkout, so edits take effect on restart without a rebuild.
+          # Your own `nvim` (e.g. nixCats, with your whole config), but loading
+          # the plugin from this checkout: edits apply on restart, no rebuild.
           ghost-dev = pkgs.writeShellApplication {
             name = "ghost-dev";
-            runtimeInputs = [ pkgs.neovim ];
             text = ''
               root="''${GHOST_DEV_ROOT:-$PWD}"
               exec nvim \
@@ -169,7 +167,6 @@
             packages = [
               ghost-dev
               plugin.ghost-server
-              pkgs.neovim
               pkgs.curl
               pkgs.lua-language-server
               pkgs.stylua
