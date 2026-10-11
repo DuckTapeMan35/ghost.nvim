@@ -33,6 +33,7 @@ local function make_item(buf, row, col, text)
 		label = label,
 		filterText = first_line(full),
 		sortText = "\0", -- sort ahead of other items with an equal score
+		score_offset = cfg.score_offset,
 		kind = vim.lsp.protocol.CompletionItemKind.Text,
 		labelDetails = { description = "ghost" },
 		insertTextFormat = vim.lsp.protocol.InsertTextFormat.PlainText,

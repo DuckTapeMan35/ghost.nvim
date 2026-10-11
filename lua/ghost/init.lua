@@ -31,6 +31,7 @@ local defaults = {
 	debounce_ms = 80,
 	trigger_characters = {},
 	label_width = 60,
+	score_offset = 100,
 
 	prefix_lines = 120,
 	suffix_lines = 40,
